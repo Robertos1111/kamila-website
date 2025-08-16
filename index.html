@@ -740,6 +740,33 @@
             margin-bottom: var(--space-lg);
             font-size: var(--text-sm);
         }
+
+        /* --- Hover Form Panel --- */
+        #formHoverOverlay{
+          position:fixed; inset:0; background:rgba(17,24,39,.55);
+          backdrop-filter: blur(6px);
+          display:none; align-items:center; justify-content:center; z-index:2000;
+        }
+        #formHoverOverlay.is-visible{ display:flex; }
+        #formHoverPanel{
+          width:min(900px, 92vw); height:min(80vh, 820px);
+          background:#fff; border-radius:16px; box-shadow:0 25px 60px rgba(0,0,0,.35);
+          overflow:hidden; position:relative;
+          border:1px solid #e5e7eb;
+        }
+        #formHoverPanel iframe{ width:100%; height:100%; border:0; }
+        #formHoverClose{
+          position:absolute; top:8px; right:10px; z-index:2;
+          width:40px; height:40px; border:0; border-radius:10px; cursor:pointer;
+          background:#111827; color:#fff; font-size:24px; line-height:40px;
+          opacity:.9; transition:.2s;
+        }
+        #formHoverClose:hover{ opacity:1; transform:scale(1.05); }
+        .sr-only{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+        @media (max-width: 767px){
+          /* na mobile: pełnoekranowo po kliknięciu */
+          #formHoverPanel{ width:100vw; height:100vh; border-radius:0; border:none; }
+        }
         
         /* Animated sections */
         .section {
@@ -1338,6 +1365,8 @@
 <li><a href="#requirements">Wymagania</a></li>
 <li><a href="#testimonials">Opinie</a></li>
 <li><a href="#contact">Kontakt</a></li>
+    <!-- Link to open the professional credit form (hover panel) -->
+    <li><a href="KamilaSkowron.html" id="formLink">Formularz</a></li>
 </ul>
 <div aria-label="Toggle menu" class="mobile-menu" id="mobileMenu">
 <span></span>
@@ -2118,5 +2147,57 @@
   render(); start();
 })();
 </script>
+
+    <!-- Hover panel z formularzem -->
+    <div id="formHoverOverlay" aria-hidden="true">
+      <div id="formHoverPanel" role="dialog" aria-modal="true" aria-labelledby="formHoverTitle">
+        <button id="formHoverClose" aria-label="Zamknij">×</button>
+        <h2 id="formHoverTitle" class="sr-only">Formularz kredytowy</h2>
+        <iframe id="formHoverFrame" title="Formularz kredytowy" loading="lazy"></iframe>
+        <noscript><a href="KamilaSkowron.html">Otwórz formularz</a></noscript>
+      </div>
+    </div>
+    <script>
+    (function(){
+      const link = document.getElementById('formLink');
+      const overlay = document.getElementById('formHoverOverlay');
+      const closeBtn = document.getElementById('formHoverClose');
+      const frame = document.getElementById('formHoverFrame');
+      const FORM_URL = 'KamilaSkowron.html';
+      let hoverTimer;
+      function openPanel(){
+        if(!frame.src) frame.src = FORM_URL;
+        overlay.classList.add('is-visible');
+        overlay.setAttribute('aria-hidden','false');
+      }
+      function closePanel(){
+        overlay.classList.remove('is-visible');
+        overlay.setAttribute('aria-hidden','true');
+      }
+      function onEnter(){
+        clearTimeout(hoverTimer);
+        hoverTimer = setTimeout(openPanel, 120);
+      }
+      function onLeave(){
+        clearTimeout(hoverTimer);
+        hoverTimer = setTimeout(closePanel, 150);
+      }
+      function isTouch(){ return ('ontouchstart' in window) || navigator.maxTouchPoints > 0; }
+      if(link){
+        if(isTouch()){
+          link.addEventListener('click', function(e){
+            e.preventDefault(); openPanel();
+          });
+        } else {
+          link.addEventListener('mouseenter', onEnter);
+          link.addEventListener('focus', onEnter);
+          overlay.addEventListener('mouseleave', onLeave);
+        }
+      }
+      closeBtn.addEventListener('click', closePanel);
+      overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closePanel(); });
+      document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closePanel(); });
+    })();
+    </script>
 </body>
 </html>
