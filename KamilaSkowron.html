@@ -672,10 +672,10 @@
             console.log('Wysyłam dane:', data);
             
             // Submit to n8n webhook
-            fetch('http://localhost:5678/webhook-test/kredyt-form-submission', {
+            fetch('https://juliband-proper-kangaroo.ngrok-free.app/webhook/kredyt-form-submission', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
+                headers: { 
+                   'Content-Type': 'application/json' 
                 },
                 body: JSON.stringify(data)
             })
@@ -721,4 +721,5 @@
         });
     </script>
 </body>
+
 </html>
