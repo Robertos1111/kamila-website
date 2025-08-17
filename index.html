@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="pl">
 <head>
 <!-- SEO & social metadata -->
@@ -25,7 +24,7 @@
 <!-- Preload critical fonts -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
 <style>
         /* CSS Custom Properties for perfect scalability */
@@ -397,12 +396,15 @@
             transform: scale(1.05);
         }
         
-        .logo i {
-            font-size: var(--text-2xl);
-            background: var(--gradient-accent);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .logo .ks-logo{
+            height:64px;
+            width:auto;
+            display:inline-block;
+            margin-right:.5rem;
+        }
+        
+        @media (min-width:1024px){ 
+            .logo .ks-logo{height:72px;} 
         }
         
         .nav-menu {
@@ -740,33 +742,6 @@
             margin-bottom: var(--space-lg);
             font-size: var(--text-sm);
         }
-
-        /* --- Hover Form Panel --- */
-        #formHoverOverlay{
-          position:fixed; inset:0; background:rgba(17,24,39,.55);
-          backdrop-filter: blur(6px);
-          display:none; align-items:center; justify-content:center; z-index:2000;
-        }
-        #formHoverOverlay.is-visible{ display:flex; }
-        #formHoverPanel{
-          width:min(900px, 92vw); height:min(80vh, 820px);
-          background:#fff; border-radius:16px; box-shadow:0 25px 60px rgba(0,0,0,.35);
-          overflow:hidden; position:relative;
-          border:1px solid #e5e7eb;
-        }
-        #formHoverPanel iframe{ width:100%; height:100%; border:0; }
-        #formHoverClose{
-          position:absolute; top:8px; right:10px; z-index:2;
-          width:40px; height:40px; border:0; border-radius:10px; cursor:pointer;
-          background:#111827; color:#fff; font-size:24px; line-height:40px;
-          opacity:.9; transition:.2s;
-        }
-        #formHoverClose:hover{ opacity:1; transform:scale(1.05); }
-        .sr-only{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
-        @media (max-width: 767px){
-          /* na mobile: pełnoekranowo po kliknięciu */
-          #formHoverPanel{ width:100vw; height:100vh; border-radius:0; border:none; }
-        }
         
         /* Animated sections */
         .section {
@@ -796,6 +771,39 @@
             height: 4px;
             background: var(--gradient-accent);
             border-radius: 2px;
+        }
+        
+        /* About section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-2xl);
+            align-items: center;
+        }
+        
+        @media (min-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-4xl);
+            }
+        }
+        
+        .about-image img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .about-text h3 {
+            margin-bottom: var(--space-lg);
+            color: var(--primary-color);
+        }
+        
+        .about-text p {
+            margin-bottom: var(--space-lg);
+            line-height: 1.8;
         }
         
         /* Calculator section */
@@ -858,6 +866,70 @@
             font-size: var(--text-3xl);
             font-weight: 700;
             color: var(--bg-primary);
+        }
+        
+        /* Requirements section */
+        .requirements-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-2xl);
+            align-items: start;
+        }
+        
+        @media (min-width: 768px) {
+            .requirements-content {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-4xl);
+            }
+        }
+        
+        .requirements-text h3 {
+            margin-bottom: var(--space-lg);
+            color: var(--primary-color);
+        }
+        
+        .requirements-text p {
+            margin-bottom: var(--space-lg);
+            line-height: 1.8;
+        }
+        
+        .checklist {
+            background: var(--bg-primary);
+            padding: var(--space-2xl);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .checklist h4 {
+            margin-bottom: var(--space-lg);
+            color: var(--primary-color);
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+            padding: var(--space-sm);
+            border-radius: var(--radius);
+            transition: background-color var(--transition-fast);
+        }
+        
+        .checklist-item:hover {
+            background: var(--bg-secondary);
+        }
+        
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--accent-color);
+            cursor: pointer;
+        }
+        
+        .checklist-item label {
+            cursor: pointer;
+            font-size: var(--text-base);
+            color: var(--text-primary);
         }
         
         /* Testimonials carousel */
@@ -934,24 +1006,25 @@
         }
         
         .slider-controls {
-            text-align: center;
-            margin-top: var(--space-xl);
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 16px;
         }
         
         .slider-dot {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background: var(--border-color);
-            margin: 0 var(--space-xs);
+            background: #d1d5db;
+            display: inline-block;
             cursor: pointer;
-            transition: all var(--transition-fast);
+            transition: transform .2s;
         }
         
         .slider-dot.active {
-            background: var(--accent-color);
-            transform: scale(1.3);
+            background: #f59e0b;
+            transform: scale(1.2);
         }
         
         /* Contact section with map background */
@@ -1257,6 +1330,80 @@
             }
         }
         
+        /* Hover Form Panel Styles */
+        #formHoverOverlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(17, 24, 39, .55);
+            backdrop-filter: blur(6px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        
+        #formHoverOverlay.is-visible {
+            display: flex;
+        }
+        
+        #formHoverPanel {
+            width: min(900px, 92vw);
+            height: min(80vh, 820px);
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, .35);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #e5e7eb;
+        }
+        
+        #formHoverPanel iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        #formHoverClose {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            z-index: 2;
+            width: 40px;
+            height: 40px;
+            border: 0;
+            border-radius: 10px;
+            cursor: pointer;
+            background: #111827;
+            color: #fff;
+            font-size: 24px;
+            line-height: 40px;
+            opacity: .9;
+            transition: .2s;
+        }
+        
+        #formHoverClose:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+            white-space: nowrap;
+        }
+        
+        @media (max-width: 767px) {
+            #formHoverPanel {
+                width: 100vw;
+                height: 100vh;
+                border-radius: 0;
+                border: none;
+            }
+        }
+        
         /* Mobile responsive */
         @media (max-width: 767px) {
             .nav-menu {
@@ -1334,16 +1481,7 @@
                 border: 1px solid var(--text-primary);
             }
         }
-    
-/* --- FIX: bigger gold KS logo in header --- */
-.logo .ks-logo{height:64px;width:auto;display:inline-block;margin-right:.5rem;}
-@media (min-width:1024px){ .logo .ks-logo{height:72px;} }
-
-/* --- FIX: testimonials slider dots --- */
-.testimonials .slider-controls{display:flex;justify-content:center;gap:10px;margin-top:16px;}
-.testimonials .slider-dot{width:10px;height:10px;border-radius:50%;background:#d1d5db;display:inline-block;cursor:pointer;transition:transform .2s;}
-.testimonials .slider-dot.active{background:#f59e0b;transform:scale(1.2);}
-</style>
+    </style>
 </head>
 <body>
 <!-- Loading screen -->
@@ -1353,6 +1491,7 @@
 <div class="loading-text">Ładowanie...</div>
 </div>
 </div>
+
 <!-- Header -->
 <header class="header" id="header">
 <div class="container">
@@ -1365,8 +1504,7 @@
 <li><a href="#requirements">Wymagania</a></li>
 <li><a href="#testimonials">Opinie</a></li>
 <li><a href="#contact">Kontakt</a></li>
-    <!-- Link to open the professional credit form (hover panel) -->
-    <li><a href="KamilaSkowron.html" id="formLink">Formularz</a></li>
+<li><a href="#" id="formLink">Formularz</a></li>
 </ul>
 <div aria-label="Toggle menu" class="mobile-menu" id="mobileMenu">
 <span></span>
@@ -1376,6 +1514,7 @@
 </nav>
 </div>
 </header>
+
 <!-- Hero Section -->
 <section class="hero" id="home">
 <div class="animated-bg">
@@ -1387,16 +1526,16 @@
 <div class="hero-content">
 <div class="hero-text">
 <h1>Twój partner w świecie <span class="highlight">kredytów</span></h1>
-<p>Profesjonalne doradztwo finansowe — pomogę Ci znaleźć najkorzystniejsze rozwiązanie kredytowe dostosowane do Twoich potrzeb. Oszczędź nawet kilkadziesiąt tysięcy złotych!</p>
+<p>Profesjonalne doradztwo finansowe – pomogę Ci znaleźć najkorzystniejsze rozwiązanie kredytowe dostosowane do Twoich potrzeb. Oszczędź nawet kilkadziesiąt tysięcy złotych!</p>
 <div class="hero-buttons">
 <a class="btn btn-primary" href="#contact">
 <i aria-hidden="true" class="fas fa-calculator pulse-icon"></i>
-                            Bezpłatna wycena
-                        </a>
+Bezpłatna wycena
+</a>
 <a class="btn btn-outline" href="tel:+48508165825">
 <i aria-hidden="true" class="fas fa-phone-alt"></i>
-                            Zadzwoń teraz
-                        </a>
+Zadzwoń teraz
+</a>
 </div>
 <div class="stats">
 <div class="stat-item">
@@ -1419,6 +1558,7 @@
 </div>
 </div>
 </section>
+
 <!-- About Section -->
 <section class="section" id="about">
 <div class="container">
@@ -1431,7 +1571,7 @@
 <img alt="Kamila Skowron - doradca kredytowy" loading="lazy" src="images/kam2.jpg"/>
 </div>
 <div class="about-text">
-<h3>Kamila Skowron — ekspert finansowy z pasją</h3>
+<h3>Kamila Skowron – ekspert finansowy z pasją</h3>
 <p>Jestem ekspertem finansowym z ponad 13 letnim doświadczeniem w branży finansowej. Specjalizuję się w kredytach hipotecznych i gotówkowych. Dobrze znam procedury bankowe i dzięki temu mogę zagwarantować skuteczność moich działań, co potwierdzają tysiące pozytywnych decyzji kredytowych dla moich klientów.</p>
 <p>Pomagam wybrać najkorzystniejsze oferty i uzyskać tanie kredyty, dzięki czemu klienci oszczędzają nawet kilkadziesiąt tysięcy złotych. Przeprowadzam klientów krok po kroku przez cały proces: oceniam szanse na uzyskanie finansowania, wskazuję najlepsze rozwiązania, w tym aktualne promocje, pomagam w kompletowaniu dokumentów oraz składam i procesuję wnioski w bankach.</p>
 <p>Jestem obecna podczas podpisywania umowy kredytowej i wspieram w negocjacjach. Jeżeli Twoja zdolność kredytowa wymaga poprawy, pokażę Ci jak zwiększyć szansę na otrzymanie kredytu.</p>
@@ -1442,6 +1582,7 @@
 </div>
 </div>
 </section>
+
 <!-- Services Section -->
 <section class="section" id="services" style="background: var(--bg-secondary);">
 <div class="container">
@@ -1485,6 +1626,7 @@
 </div>
 </div>
 </section>
+
 <!-- Calculator Widget -->
 <section class="section">
 <div class="container">
@@ -1511,6 +1653,7 @@
 </div>
 </div>
 </section>
+
 <!-- Requirements Section -->
 <section class="section" id="requirements" style="background: var(--bg-secondary);">
 <div class="container">
@@ -1559,98 +1702,52 @@
 </div>
 </div>
 </section>
+
 <!-- Testimonials Section -->
-<section class="section testimonials" id="testimonials"><div class="testimonials-slider"><div class="testimonial-track" id="testimonialTrack"><div class="testimonial">
+<section class="section testimonials" id="testimonials">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">Opinie klientów</h2>
+<p class="section-subtitle">Zobacz, co mówią o mnie zadowoleni klienci</p>
+</div>
+<div class="testimonials-slider">
+<div class="testimonial-track" id="testimonialTrack">
+<div class="testimonial">
 <p class="testimonial-content">"Profesjonalizm na najwyższym poziomie! Pani Kamila pomogła mi uzyskać kredyt hipoteczny na bardzo korzystnych warunkach. Całą procedurę przeprowadziła sprawnie i bez stresu."</p>
 <div class="testimonial-author">
-<img alt="Michał Kowalski" class="author-image" loading="lazy" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=70&amp;h=70&amp;fit=crop&amp;auto=format"/>
+<img alt="Michał Kowalski" class="author-image" loading="lazy" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=70&h=70&fit=crop&auto=format"/>
 <div class="author-info">
 <h4>Michał Kowalski</h4>
 <div class="rating">★★★★★</div>
 </div>
 </div>
-</div><div class="testimonial">
+</div>
+<div class="testimonial">
 <p class="testimonial-content">"Dzięki pomocy Pani Kamili udało mi się skonsolidować wszystkie kredyty. Teraz płacę jedną, znacznie niższą ratę. Polecam każdemu!"</p>
 <div class="testimonial-author">
-<img alt="Anna Nowak" class="author-image" loading="lazy" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=70&amp;h=70&amp;fit=crop&amp;auto=format"/>
+<img alt="Anna Nowak" class="author-image" loading="lazy" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=70&h=70&fit=crop&auto=format"/>
 <div class="author-info">
 <h4>Anna Nowak</h4>
 <div class="rating">★★★★★</div>
 </div>
 </div>
-</div><div class="testimonial">
+</div>
+<div class="testimonial">
 <p class="testimonial-content">"Szukałem kredytu dla mojej firmy i trafiłem do Pani Kamili. Jej wiedza i kontakty w bankach sprawiły, że otrzymałem finansowanie na świetnych warunkach."</p>
 <div class="testimonial-author">
-<img alt="Piotr Wiśniewski" class="author-image" loading="lazy" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=70&amp;h=70&amp;fit=crop&amp;auto=format"/>
+<img alt="Piotr Wiśniewski" class="author-image" loading="lazy" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=70&h=70&fit=crop&auto=format"/>
 <div class="author-info">
 <h4>Piotr Wiśniewski</h4>
 <div class="rating">★★★★★</div>
 </div>
 </div>
-</div><div class="testimonial">
-<p class="testimonial-content">"Pani Kamila krok po kroku przeprowadziła mnie przez cały proces. Świetny kontakt i cierpliwość."</p>
-<div class="testimonial-author">
-<img alt="Client" class="author-image" src="images/kam3.jpg"/>
-<div class="author-info">
-<h4>Katarzyna M.</h4>
-<div class="rating">★★★★★</div>
 </div>
 </div>
-</div><div class="testimonial">
-<p class="testimonial-content">"Dzięki poradom uniknąłem niekorzystnych warunków. Rzetelnie i jasno wyjaśnione możliwości."</p>
-<div class="testimonial-author">
-<img alt="Client" class="author-image" src="images/kam3.jpg"/>
-<div class="author-info">
-<h4>Łukasz P.</h4>
-<div class="rating">★★★★★</div>
+<div class="slider-controls" id="testimonialDots"></div>
 </div>
 </div>
-</div><div class="testimonial">
-<p class="testimonial-content">"Kredyt konsolidacyjny załatwiony szybko, rata spadła o 30%. Polecam!"</p>
-<div class="testimonial-author">
-<img alt="Client" class="author-image" src="images/kam3.jpg"/>
-<div class="author-info">
-<h4>Ewelina Z.</h4>
-<div class="rating">★★★★★</div>
-</div>
-</div>
-</div><div class="testimonial">
-<p class="testimonial-content">"Profesjonalizm i życzliwość. Widać duże doświadczenie w rozmowach z bankami."</p>
-<div class="testimonial-author">
-<img alt="Client" class="author-image" src="images/kam3.jpg"/>
-<div class="author-info">
-<h4>Tomasz R.</h4>
-<div class="rating">★★★★★</div>
-</div>
-</div>
-</div><div class="testimonial">
-<p class="testimonial-content">"Czułam się zaopiekowana od pierwszego telefonu do podpisania umowy."</p>
-<div class="testimonial-author">
-<img alt="Client" class="author-image" src="images/kam3.jpg"/>
-<div class="author-info">
-<h4>Dominika S.</h4>
-<div class="rating">★★★★★</div>
-</div>
-</div>
-</div><div class="testimonial">
-<p class="testimonial-content">"Sprawnie, konkretnie, bez stresu. Takiej pomocy potrzebowałem."</p>
-<div class="testimonial-author">
-<img alt="Client" class="author-image" src="images/kam3.jpg"/>
-<div class="author-info">
-<h4>Marek J.</h4>
-<div class="rating">★★★★★</div>
-</div>
-</div>
-</div><div class="testimonial">
-<p class="testimonial-content">"Znalazła dla mnie lepszą ofertę niż oczekiwałem. Dziękuję!"</p>
-<div class="testimonial-author">
-<img alt="Client" class="author-image" src="images/kam3.jpg"/>
-<div class="author-info">
-<h4>Agnieszka L.</h4>
-<div class="rating">★★★★★</div>
-</div>
-</div>
-</div></div><div class="slider-controls" id="testimonialDots"></div></div></section>
+</section>
+
 <!-- Contact Section -->
 <section class="section contact" id="contact">
 <div class="container">
@@ -1718,17 +1815,18 @@
 </div>
 <button class="form-submit" type="submit">
 <i class="fas fa-paper-plane"></i>
-                            Wyślij zapytanie
-                        </button>
+Wyślij zapytanie
+</button>
 <div class="form-success" id="contactSuccess">
 <i class="fas fa-check-circle"></i>
-                            Dziękujemy! Twoje zgłoszenie zostało wysłane. Skontaktuję się z Tobą w ciągu 24 godzin.
-                        </div>
+Dziękujemy! Twoje zgłoszenie zostało wysłane. Skontaktuję się z Tobą w ciągu 24 godzin.
+</div>
 </form>
 </div>
 </div>
 </div>
 </section>
+
 <!-- Footer -->
 <footer class="footer">
 <div class="container">
@@ -1753,13 +1851,25 @@
 <i class="fas fa-envelope"></i>
 </a>
 </div>
-<p>© 2025 Kamila Skowron — Ekspert Finansowy. Wszelkie prawa zastrzeżone.</p>
+<p>© 2025 Kamila Skowron – Ekspert Finansowy. Wszelkie prawa zastrzeżone.</p>
 </div>
 </footer>
+
 <!-- Scroll to top button -->
 <div aria-label="Przewiń na górę" class="scroll-top" id="scrollTop">
 <i class="fas fa-arrow-up"></i>
 </div>
+
+<!-- Hover panel z formularzem -->
+<div id="formHoverOverlay" aria-hidden="true">
+<div id="formHoverPanel" role="dialog" aria-modal="true" aria-labelledby="formHoverTitle">
+<button id="formHoverClose" aria-label="Zamknij">×</button>
+<h2 id="formHoverTitle" class="sr-only">Formularz kredytowy</h2>
+<iframe id="formHoverFrame" title="Formularz kredytowy" loading="lazy"></iframe>
+<noscript><a href="KamilaSkowron.html">Otwórz formularz</a></noscript>
+</div>
+</div>
+
 <script>
         // Enhanced JavaScript with animations and interactions
         class KamilaSkowronWebsite {
@@ -1776,6 +1886,7 @@
                 this.setupAutoSlider();
                 this.setupCalculator();
                 this.animateCounters();
+                this.setupFormHoverPanel();
             }
 
             setupEventListeners() {
@@ -1843,7 +1954,6 @@
                     if (this.validateForm(contactForm)) {
                         this.showSuccessMessage('contactSuccess');
                         contactForm.reset();
-                        // Here you would normally send the form data to a server
                     }
                 });
             }
@@ -1882,7 +1992,6 @@
 
             showFieldError(field, message) {
                 field.style.borderColor = '#ef4444';
-                // You could add error message display here
             }
 
             clearFieldError(field) {
@@ -1977,26 +2086,48 @@
             }
 
             setupAutoSlider() {
-                // Auto-advance testimonials
-                setInterval(() => {
-                    this.currentTestimonial = (this.currentTestimonial + 1) % this.testimonialCount;
-                    this.changeTestimonial(this.currentTestimonial);
-                }, 8000);
-
-                // Make changeTestimonial globally accessible
-                window.changeTestimonial = (index) => {
-                    this.changeTestimonial(index);
-                };
-            }
-
-            changeTestimonial(index) {
-                this.currentTestimonial = index;
                 const track = document.getElementById('testimonialTrack');
-                track.style.transform = `translateX(-${index * 100}%)`;
-                
-                document.querySelectorAll('.slider-dot').forEach((dot, i) => {
-                    dot.classList.toggle('active', i === index);
+                if(!track) return;
+                const slides = Array.from(track.querySelectorAll('.testimonial'));
+                const dotsWrap = document.getElementById('testimonialDots');
+                let index = 0, timer = null, interval = 5000;
+
+                // Build dots
+                slides.forEach((_, i) => {
+                    const dot = document.createElement('span');
+                    dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+                    dot.setAttribute('aria-label', 'Przejdź do opinii ' + (i + 1));
+                    dot.addEventListener('click', () => go(i, true));
+                    dotsWrap.appendChild(dot);
                 });
+
+                function render() {
+                    track.style.transform = 'translateX(' + (-index * 100) + '%)';
+                    track.style.display = 'flex';
+                    track.style.transition = 'transform 600ms ease';
+                    slides.forEach(s => { s.style.minWidth = '100%'; });
+                    dotsWrap.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === index));
+                }
+
+                function go(i, user = false) { 
+                    index = (i + slides.length) % slides.length; 
+                    render(); 
+                    if(user) stop(); 
+                }
+                
+                function next() { go(index + 1); }
+                function start() { if(timer) return; timer = setInterval(next, interval); }
+                function stop() { if(!timer) return; clearInterval(timer); timer = null; }
+
+                // Accessibility: pause on hover/focus
+                track.addEventListener('mouseenter', stop);
+                track.addEventListener('mouseleave', start);
+                track.addEventListener('focusin', stop);
+                track.addEventListener('focusout', start);
+
+                // Start
+                render(); 
+                start();
             }
 
             setupCalculator() {
@@ -2086,6 +2217,41 @@
                 counters.forEach(counter => observer.observe(counter));
             }
 
+            setupFormHoverPanel() {
+                const link = document.getElementById('formLink');
+                const overlay = document.getElementById('formHoverOverlay');
+                const closeBtn = document.getElementById('formHoverClose');
+                const frame = document.getElementById('formHoverFrame');
+                const FORM_URL = 'KamilaSkowron.html';
+                
+                function openPanel() {
+                    if(!frame.src) frame.src = FORM_URL;
+                    overlay.classList.add('is-visible');
+                    overlay.setAttribute('aria-hidden', 'false');
+                }
+                
+                function closePanel() {
+                    overlay.classList.remove('is-visible');
+                    overlay.setAttribute('aria-hidden', 'true');
+                }
+                
+                if(link) {
+                    // Only open on click, not on hover
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        openPanel();
+                    });
+                }
+                
+                closeBtn.addEventListener('click', closePanel);
+                overlay.addEventListener('click', (e) => { 
+                    if(e.target === overlay) closePanel(); 
+                });
+                document.addEventListener('keydown', (e) => { 
+                    if(e.key === 'Escape') closePanel(); 
+                });
+            }
+
             throttle(func, limit) {
                 let inThrottle;
                 return function() {
@@ -2104,100 +2270,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             new KamilaSkowronWebsite();
         });
-    </script>
-
-<script>
-(function(){
-  const track = document.getElementById('testimonialTrack');
-  if(!track) return;
-  const slides = Array.from(track.querySelectorAll('.testimonial'));
-  const dotsWrap = document.getElementById('testimonialDots');
-  let index = 0, timer=null, interval=5000;
-
-  // Build dots
-  slides.forEach((_,i)=>{
-    const dot = document.createElement('span');
-    dot.className='slider-dot'+(i===0?' active':'');
-    dot.setAttribute('aria-label','Przejdź do opinii '+(i+1));
-    dot.addEventListener('click',()=>go(i,true));
-    dotsWrap.appendChild(dot);
-  });
-
-  function render(){
-    track.style.transform = 'translateX(' + (-index*100) + '%)';
-    // ensure proper widths
-    track.style.display='flex';
-    track.style.transition='transform 600ms ease';
-    slides.forEach(s=>{ s.style.minWidth='100%'; });
-    dotsWrap.querySelectorAll('.slider-dot').forEach((d,i)=>d.classList.toggle('active', i===index));
-  }
-
-  function go(i,user=false){ index=(i+slides.length)%slides.length; render(); if(user) stop(); }
-  function next(){ go(index+1); }
-  function start(){ if(timer) return; timer=setInterval(next, interval); }
-  function stop(){ if(!timer) return; clearInterval(timer); timer=null; }
-
-  // Accessibility: pause on hover/focus
-  track.addEventListener('mouseenter', stop);
-  track.addEventListener('mouseleave', start);
-  track.addEventListener('focusin', stop);
-  track.addEventListener('focusout', start);
-
-  // Start
-  render(); start();
-})();
-</script>
-
-    <!-- Hover panel z formularzem -->
-    <div id="formHoverOverlay" aria-hidden="true">
-      <div id="formHoverPanel" role="dialog" aria-modal="true" aria-labelledby="formHoverTitle">
-        <button id="formHoverClose" aria-label="Zamknij">×</button>
-        <h2 id="formHoverTitle" class="sr-only">Formularz kredytowy</h2>
-        <iframe id="formHoverFrame" title="Formularz kredytowy" loading="lazy"></iframe>
-        <noscript><a href="KamilaSkowron.html">Otwórz formularz</a></noscript>
-      </div>
-    </div>
-    <script>
-    (function(){
-      const link = document.getElementById('formLink');
-      const overlay = document.getElementById('formHoverOverlay');
-      const closeBtn = document.getElementById('formHoverClose');
-      const frame = document.getElementById('formHoverFrame');
-      const FORM_URL = 'KamilaSkowron.html';
-      let hoverTimer;
-      function openPanel(){
-        if(!frame.src) frame.src = FORM_URL;
-        overlay.classList.add('is-visible');
-        overlay.setAttribute('aria-hidden','false');
-      }
-      function closePanel(){
-        overlay.classList.remove('is-visible');
-        overlay.setAttribute('aria-hidden','true');
-      }
-      function onEnter(){
-        clearTimeout(hoverTimer);
-        hoverTimer = setTimeout(openPanel, 120);
-      }
-      function onLeave(){
-        clearTimeout(hoverTimer);
-        hoverTimer = setTimeout(closePanel, 150);
-      }
-      function isTouch(){ return ('ontouchstart' in window) || navigator.maxTouchPoints > 0; }
-      if(link){
-        if(isTouch()){
-          link.addEventListener('click', function(e){
-            e.preventDefault(); openPanel();
-          });
-        } else {
-          link.addEventListener('mouseenter', onEnter);
-          link.addEventListener('focus', onEnter);
-          overlay.addEventListener('mouseleave', onLeave);
-        }
-      }
-      closeBtn.addEventListener('click', closePanel);
-      overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closePanel(); });
-      document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closePanel(); });
-    })();
     </script>
 </body>
 </html>
